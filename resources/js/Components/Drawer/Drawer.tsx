@@ -1,5 +1,4 @@
-import { router } from '@inertiajs/react';
-import { MouseEventHandler, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 type Props = {
     children: ReactNode;
@@ -7,26 +6,16 @@ type Props = {
 
 export default function Drawer({ children }: Props) {
     function handleBackgroundClick() {
-        router.visit(
-            route('speed-dial', {
-                editing: true,
-            }),
-        );
+        history.back();
     }
 
-    const handleDrawerClicked: MouseEventHandler<HTMLDivElement> = (e) => {
-        e.stopPropagation();
-    };
-
     return (
-        <div
-            className="absolute h-full w-full bg-black/25"
-            onClick={handleBackgroundClick}
-        >
+        <div className="absolute flex h-screen w-screen">
             <div
-                onClick={handleDrawerClicked}
-                className="absolute right-0 top-0 h-full w-96 bg-white"
-            >
+                onClick={handleBackgroundClick}
+                className="flex-aut"
+            />
+            <div className="h-full w-96 border-l border-gray-500 bg-black/30 backdrop-blur-xl">
                 {children}
             </div>
         </div>

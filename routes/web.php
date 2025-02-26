@@ -5,9 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SpeedDialController;
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/speed-dial', [SpeedDialController::class, 'index'])->name('speed-dial');
-    Route::get('/', [SpeedDialController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
     Route::get('sites', [SiteController::class, 'index'])->name('sites.index');
     Route::put('sites/{site}', [SiteController::class, 'update'])->name('sites.update');
     Route::delete('sites/{site}', [SiteController::class, 'destroy'])->name('sites.destroy');
@@ -19,5 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/speed-dial', [SpeedDialController::class, 'index'])->name('speed-dial');
+Route::get('/', [SpeedDialController::class, 'index'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

@@ -16,12 +16,12 @@ class SpeedDialController extends Controller
     {
         return Inertia::render('SpeedDial', [
             'sites' => Site::all(),
-            'editing' => $request->boolean('editing'),
             'site' => $request->whenFilled(
                 'site',
                 static fn () => Site::findOrFail($request->site),
                 static fn () => null,
             ),
+            'isLoggedIn' => $request->user() !== null,
             'creating' => $request->boolean('creating'),
         ]);
     }

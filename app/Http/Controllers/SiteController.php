@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSiteRequest;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -68,9 +69,7 @@ class SiteController extends Controller
     {
         $site->update($request->all());
 
-        return to_route('speed-dial', [
-            'editing' => true,
-        ]);
+        return to_route('speed-dial');
     }
 
     /**

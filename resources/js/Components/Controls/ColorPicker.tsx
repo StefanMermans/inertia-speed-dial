@@ -11,6 +11,10 @@ type Props = Exclude<
 
 export default function ColorPicker({ className, ...props }: Props) {
     return (
-        <input {...props} className={cn('bg-white border border-black', className)} type="color" />
+        <input
+            {...props}
+            className={cn('border border-black bg-white', className)}
+            type="color"
+        />
     );
 }

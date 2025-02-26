@@ -18,11 +18,14 @@ type SiteFormData = Pick<Site, 'name' | 'url' | 'background_color'> & {
 };
 
 export default function SiteForm({ site, creating }: Props) {
-    const { data, setData, errors, clearErrors, post } = useForm<SiteFormData>({
-        name: site?.name ?? '',
-        url: site?.url ?? '',
-        background_color: site?.background_color ?? '',
-    });
+    const { data, setData, errors, clearErrors, post } = useForm<SiteFormData>(
+        'SiteForm/create',
+        {
+            name: site?.name ?? '',
+            url: site?.url ?? '',
+            background_color: site?.background_color ?? '',
+        },
+    );
 
     const create = () => {
         post(route('sites.store'), {
@@ -90,11 +93,7 @@ export default function SiteForm({ site, creating }: Props) {
                     'bg-[url(/background-compressed.jpg)]',
                 )}
             >
-                <SiteComponent
-                    clickable={false}
-                    editable={false}
-                    site={sitePreview}
-                />
+                <SiteComponent editable={false} site={sitePreview} />
             </div>
             <Input
                 className="text-black"
@@ -110,7 +109,7 @@ export default function SiteForm({ site, creating }: Props) {
                 onChange={(e) => setData('url', e.target.value)}
             />
             {errors.url && <div className="text-red-500">{errors.url}</div>}
-            <label className='flex gap-2'>
+            <label className="flex gap-2">
                 <ColorPicker
                     className="text-black"
                     value={data.background_color}
